@@ -43,6 +43,10 @@ development:
 test:
   <<: *default
   database: spotify_portfolio_test
+  username: <%= ENV.fetch("DB_USERNAME", "postgres") %>
+  password: <%= ENV.fetch("DB_PASSWORD", "") %>
+  host: <%= ENV.fetch("DB_HOST", "localhost") %>
+  port: <%= ENV.fetch("DB_PORT", "5432") %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -65,20 +69,22 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  primary: &primary_production
+  primary:
     <<: *default
-    database: spotify_portfolio_production
-    username: spotify_portfolio
-    password: <%= ENV["SPOTIFY_PORTFOLIO_DATABASE_PASSWORD"] %>
+    url: <%= ENV["DATABASE_URL"] %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
   cache:
-    <<: *primary_production
-    database: spotify_portfolio_production_cache
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
     migrations_paths: db/cache_migrate
+
   queue:
-    <<: *primary_production
-    database: spotify_portfolio_production_queue
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
     migrations_paths: db/queue_migrate
+
   cable:
-    <<: *primary_production
-    database: spotify_portfolio_production_cable
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
     migrations_paths: db/cable_migrate
