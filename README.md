@@ -1,11 +1,11 @@
 # Spotify API Portfolio Integration
 
-A Ruby on Rails API that integrates with Spotify to display your top tracks, currently playing song, followed artists, and control playback. Built for deployment on Railway with PostgreSQL.
+A Ruby on Rails API that integrates with Spotify to display your top tracks, currently playing song, followed artists, and control playback.
 
 ## Features
 
 - View your top 10 tracks
-- See currently playing song
+- See the currently playing song
 - List followed artists
 - Pause current playback
 - Play any of your top tracks
@@ -37,7 +37,7 @@ A Ruby on Rails API that integrates with Spotify to display your top tracks, cur
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/dwstyagi/spotify-portfoilio.git
 cd spotify-portfolio
 ```
 
@@ -104,7 +104,7 @@ All endpoints return pretty-printed JSON.
 ### Base URL
 
 **Local**: `http://localhost:3000/spotify`
-**Production**: `https://your-app.up.railway.app/spotify`
+**Production**: `https://your-prod-app.com/spotify`
 
 ---
 
@@ -314,44 +314,6 @@ curl -X POST http://localhost:3000/spotify/play/4cOdK2wGLETKBW3PvgPWqT
 }
 ```
 
-## Deployment
-
-See `RAILWAY_DEPLOYMENT.md` for complete deployment instructions for Railway.
-
-### Quick Deployment Steps:
-
-1. Push code to GitHub
-2. Create new Railway project from GitHub repo
-3. Add PostgreSQL database
-4. Set environment variables
-5. Update Spotify app redirect URI
-6. Deploy and authenticate
-
-## Project Structure
-
-```
-spotify-portfolio/
-├── app/
-│   ├── controllers/
-│   │   ├── admin/
-│   │   │   └── auth_controller.rb    # OAuth authentication
-│   │   └── spotify_controller.rb     # Main API endpoints
-│   ├── models/
-│   │   └── spotify_token.rb          # Token storage & refresh
-│   └── services/
-│       └── spotify_service.rb        # Spotify API wrapper
-├── config/
-│   ├── database.yml                  # Database configuration
-│   └── routes.rb                     # API routes
-├── db/
-│   └── migrate/                      # Database migrations
-├── .env                              # Environment variables (local)
-├── .env.example                      # Example env file
-├── Procfile                          # Railway process file
-├── SPOTIFY_SETUP_GUIDE.md           # Spotify app setup guide
-└── RAILWAY_DEPLOYMENT.md            # Deployment guide
-```
-
 ## Required Spotify Scopes
 
 - `user-read-currently-playing` - Read currently playing track
@@ -364,7 +326,7 @@ spotify-portfolio/
 
 - **Spotify Premium** is required for playback control features (pause/play)
 - Free accounts can still access: top tracks, now playing (read-only), and followed artists
-- Tokens automatically refresh when expired
+- Tokens automatically refresh when they expire
 - Only one authentication is stored (single-user app)
 - All JSON responses are pretty-printed for easy browser viewing
 
@@ -392,4 +354,4 @@ MIT
 
 ## Author
 
-Your Name - Portfolio Project
+Diwanshu Tyagi - Portfolio Project
