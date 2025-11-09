@@ -33,6 +33,5 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-# Ignore GitHub workflows and Kamal deployment
-/.github
+# Ignore Kamal deployment
 /.kamal
