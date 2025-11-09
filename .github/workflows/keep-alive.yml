@@ -1,0 +1,23 @@
+name: Keep Render Service Alive
+
+on:
+  schedule:
+    # Runs every 10 minutes
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping health check endpoint
+        run: |
+          echo "Pinging Spotify API..."
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://spotify-portfoilio.onrender.com/up)
+          echo "Response code: $response"
+          if [ $response -eq 200 ]; then
+            echo "✅ App is alive!"
+          else
+            echo "❌ App returned $response"
+            exit 1
+          fi
